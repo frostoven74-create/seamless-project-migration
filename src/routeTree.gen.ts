@@ -10,33 +10,193 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AtlasRouteImport } from './routes/atlas'
+import { Route as DiscoverRouteImport } from './routes/discover'
+import { Route as LedgerRouteImport } from './routes/ledger'
+import { Route as PlanetRouteImport } from './routes/planet'
+import { Route as RippleRouteImport } from './routes/ripple'
+import { Route as PassportsIndexRouteImport } from './routes/passports.index'
+import { Route as PassportsIdRouteImport } from './routes/passports.$id'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as ProjectsIdRouteImport } from './routes/projects.$id'
+import { Route as SdgsIndexRouteImport } from './routes/sdgs.index'
+import { Route as SdgsGoalRouteImport } from './routes/sdgs.$goal'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtlasRoute = AtlasRouteImport.update({
+  id: '/atlas',
+  path: '/atlas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiscoverRoute = DiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LedgerRoute = LedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanetRoute = PlanetRouteImport.update({
+  id: '/planet',
+  path: '/planet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RippleRoute = RippleRouteImport.update({
+  id: '/ripple',
+  path: '/ripple',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PassportsIndexRoute = PassportsIndexRouteImport.update({
+  id: '/passports/',
+  path: '/passports/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PassportsIdRoute = PassportsIdRouteImport.update({
+  id: '/passports/$id',
+  path: '/passports/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIdRoute = ProjectsIdRouteImport.update({
+  id: '/projects/$id',
+  path: '/projects/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SdgsIndexRoute = SdgsIndexRouteImport.update({
+  id: '/sdgs/',
+  path: '/sdgs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SdgsGoalRoute = SdgsGoalRouteImport.update({
+  id: '/sdgs/$goal',
+  path: '/sdgs/$goal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/atlas': typeof AtlasRoute
+  '/discover': typeof DiscoverRoute
+  '/ledger': typeof LedgerRoute
+  '/planet': typeof PlanetRoute
+  '/ripple': typeof RippleRoute
+  '/passports/$id': typeof PassportsIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/sdgs/$goal': typeof SdgsGoalRoute
+  '/passports/': typeof PassportsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/sdgs/': typeof SdgsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/atlas': typeof AtlasRoute
+  '/discover': typeof DiscoverRoute
+  '/ledger': typeof LedgerRoute
+  '/planet': typeof PlanetRoute
+  '/ripple': typeof RippleRoute
+  '/passports/$id': typeof PassportsIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/sdgs/$goal': typeof SdgsGoalRoute
+  '/passports': typeof PassportsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
+  '/sdgs': typeof SdgsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/atlas': typeof AtlasRoute
+  '/discover': typeof DiscoverRoute
+  '/ledger': typeof LedgerRoute
+  '/planet': typeof PlanetRoute
+  '/ripple': typeof RippleRoute
+  '/passports/$id': typeof PassportsIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
+  '/sdgs/$goal': typeof SdgsGoalRoute
+  '/passports/': typeof PassportsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/sdgs/': typeof SdgsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/atlas'
+    | '/discover'
+    | '/ledger'
+    | '/planet'
+    | '/ripple'
+    | '/passports/$id'
+    | '/projects/$id'
+    | '/sdgs/$goal'
+    | '/passports/'
+    | '/projects/'
+    | '/sdgs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/atlas'
+    | '/discover'
+    | '/ledger'
+    | '/planet'
+    | '/ripple'
+    | '/passports/$id'
+    | '/projects/$id'
+    | '/sdgs/$goal'
+    | '/passports'
+    | '/projects'
+    | '/sdgs'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/atlas'
+    | '/discover'
+    | '/ledger'
+    | '/planet'
+    | '/ripple'
+    | '/passports/$id'
+    | '/projects/$id'
+    | '/sdgs/$goal'
+    | '/passports/'
+    | '/projects/'
+    | '/sdgs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AtlasRoute: typeof AtlasRoute
+  DiscoverRoute: typeof DiscoverRoute
+  LedgerRoute: typeof LedgerRoute
+  PlanetRoute: typeof PlanetRoute
+  RippleRoute: typeof RippleRoute
+  PassportsIdRoute: typeof PassportsIdRoute
+  ProjectsIdRoute: typeof ProjectsIdRoute
+  SdgsGoalRoute: typeof SdgsGoalRoute
+  PassportsIndexRoute: typeof PassportsIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
+  SdgsIndexRoute: typeof SdgsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +208,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atlas': {
+      id: '/atlas'
+      path: '/atlas'
+      fullPath: '/atlas'
+      preLoaderRoute: typeof AtlasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/discover': {
+      id: '/discover'
+      path: '/discover'
+      fullPath: '/discover'
+      preLoaderRoute: typeof DiscoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ledger': {
+      id: '/ledger'
+      path: '/ledger'
+      fullPath: '/ledger'
+      preLoaderRoute: typeof LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planet': {
+      id: '/planet'
+      path: '/planet'
+      fullPath: '/planet'
+      preLoaderRoute: typeof PlanetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ripple': {
+      id: '/ripple'
+      path: '/ripple'
+      fullPath: '/ripple'
+      preLoaderRoute: typeof RippleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passports/': {
+      id: '/passports/'
+      path: '/passports'
+      fullPath: '/passports/'
+      preLoaderRoute: typeof PassportsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passports/$id': {
+      id: '/passports/$id'
+      path: '/passports/$id'
+      fullPath: '/passports/$id'
+      preLoaderRoute: typeof PassportsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/$id': {
+      id: '/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/projects/$id'
+      preLoaderRoute: typeof ProjectsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sdgs/': {
+      id: '/sdgs/'
+      path: '/sdgs'
+      fullPath: '/sdgs/'
+      preLoaderRoute: typeof SdgsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sdgs/$goal': {
+      id: '/sdgs/$goal'
+      path: '/sdgs/$goal'
+      fullPath: '/sdgs/$goal'
+      preLoaderRoute: typeof SdgsGoalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AtlasRoute: AtlasRoute,
+  DiscoverRoute: DiscoverRoute,
+  LedgerRoute: LedgerRoute,
+  PlanetRoute: PlanetRoute,
+  RippleRoute: RippleRoute,
+  PassportsIdRoute: PassportsIdRoute,
+  ProjectsIdRoute: ProjectsIdRoute,
+  SdgsGoalRoute: SdgsGoalRoute,
+  PassportsIndexRoute: PassportsIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
+  SdgsIndexRoute: SdgsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

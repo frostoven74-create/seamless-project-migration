@@ -1,0 +1,1 @@
+[{"capability":"code","source":"archive","outcome":"migrate","status":"verified","next_action":null},{"capability":"database/auth","source":"none (browser storage)","outcome":"none","status":"verified","next_action":null},{"capability":"ai research","source":"Lovable AI gateway","outcome":"keep","status":"pending","next_action":"verify in preview"}]

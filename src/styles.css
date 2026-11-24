@@ -1,9 +1,6 @@
 /*
  * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
- * - Keep every @import in this top block, above @theme and the rest of the file. Install an
- *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
- *   build resolves @import from the filesystem. Load those with a <link> in the head() of
- *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
  */
 @import "tailwindcss" source(none);
 @source "../src";
@@ -12,31 +9,22 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The design lives in this file: oklch color tokens on the shadcn variables
- * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
- * new tokens as needed, font tokens, and custom styles and animations.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * EARTH//OS design system — "observatory at night".
+ * The product is dark-only by design: every surface derives from the Void → Moss ramp,
+ * with three luminous signals (Soft Green, Bioluminescent Cyan, Muted Gold).
+ * Provenance colours are semantic: each kind of information has exactly one colour.
  */
-
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 10px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -70,86 +58,228 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Brand ramp */
+  --color-void: var(--void);
+  --color-forest: var(--forest);
+  --color-graphite: var(--graphite);
+  --color-moss: var(--moss);
+  --color-bone: var(--bone);
+  --color-sprout: var(--sprout);
+  --color-biolume: var(--biolume);
+  --color-emerald: var(--emerald);
+  --color-gold: var(--gold);
+  --color-lichen: var(--lichen);
+  --color-hairline: var(--hairline);
+
+  /* Provenance — one colour per kind of information */
+  --color-prov-official: var(--prov-official);
+  --color-prov-analysis: var(--prov-analysis);
+  --color-prov-ai: var(--prov-ai);
+  --color-prov-calculated: var(--prov-calculated);
+  --color-prov-reported: var(--prov-reported);
+  --color-prov-verified: var(--prov-verified);
+  --color-prov-sample: var(--prov-sample);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --radius: 0.25rem;
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Palette (from the EARTH//OS directive) */
+  --void: oklch(0.13 0.004 165);          /* #020303 */
+  --forest: oklch(0.17 0.016 160);        /* #07110D */
+  --graphite: oklch(0.21 0.01 165);       /* #111816 */
+  --moss: oklch(0.255 0.022 150);         /* #19251D */
+  --bone: oklch(0.96 0.017 113);          /* #F3F4EA */
+  --sprout: oklch(0.83 0.083 144);        /* #A6D8A4 */
+  --biolume: oklch(0.89 0.083 209);       /* #8EEAFF */
+  --emerald: oklch(0.71 0.13 155);        /* #4BBE83 */
+  --gold: oklch(0.8 0.073 80);            /* #D8B982 */
+  --lichen: oklch(0.72 0.014 150);        /* #A3ADA5 */
+  --hairline: oklch(0.96 0.017 113 / 10%);
+
+  --background: var(--void);
+  --foreground: var(--bone);
+  --card: var(--forest);
+  --card-foreground: var(--bone);
+  --popover: var(--graphite);
+  --popover-foreground: var(--bone);
+  --primary: var(--sprout);
+  --primary-foreground: var(--void);
+  --secondary: var(--moss);
+  --secondary-foreground: var(--bone);
+  --muted: var(--graphite);
+  --muted-foreground: var(--lichen);
+  --accent: var(--moss);
+  --accent-foreground: var(--bone);
+  --destructive: oklch(0.66 0.17 28);
+  --destructive-foreground: var(--bone);
+  --border: var(--hairline);
+  --input: oklch(0.96 0.017 113 / 16%);
+  --ring: var(--biolume);
+  --chart-1: var(--sprout);
+  --chart-2: var(--biolume);
+  --chart-3: var(--gold);
+  --chart-4: var(--emerald);
+  --chart-5: var(--lichen);
+  --sidebar: var(--forest);
+  --sidebar-foreground: var(--bone);
+  --sidebar-primary: var(--sprout);
+  --sidebar-primary-foreground: var(--void);
+  --sidebar-accent: var(--moss);
+  --sidebar-accent-foreground: var(--bone);
+  --sidebar-border: var(--hairline);
+  --sidebar-ring: var(--biolume);
+
+  --prov-official: var(--bone);
+  --prov-analysis: var(--sprout);
+  --prov-ai: var(--biolume);
+  --prov-calculated: oklch(0.8 0.06 260);
+  --prov-reported: oklch(0.78 0.11 60);
+  --prov-verified: var(--gold);
+  --prov-sample: oklch(0.72 0.09 330);
+
+  /* Official UN SDG identity colours — used only as small markers for recognition */
+  --sdg-1: oklch(0.59 0.21 22);
+  --sdg-2: oklch(0.75 0.13 78);
+  --sdg-3: oklch(0.62 0.15 140);
+  --sdg-4: oklch(0.52 0.19 22);
+  --sdg-5: oklch(0.65 0.23 33);
+  --sdg-6: oklch(0.74 0.13 222);
+  --sdg-7: oklch(0.85 0.17 88);
+  --sdg-8: oklch(0.45 0.17 10);
+  --sdg-9: oklch(0.69 0.19 45);
+  --sdg-10: oklch(0.57 0.23 0);
+  --sdg-11: oklch(0.77 0.16 64);
+  --sdg-12: oklch(0.65 0.11 73);
+  --sdg-13: oklch(0.52 0.1 145);
+  --sdg-14: oklch(0.63 0.15 240);
+  --sdg-15: oklch(0.72 0.2 136);
+  --sdg-16: oklch(0.47 0.12 240);
+  --sdg-17: oklch(0.38 0.08 245);
+
+  --gradient-horizon: radial-gradient(120% 80% at 50% 110%, oklch(0.255 0.022 150 / 70%) 0%, transparent 60%);
+  --gradient-canopy: radial-gradient(60% 50% at 50% 35%, oklch(0.71 0.13 155 / 14%) 0%, transparent 70%);
+  --shadow-glow: 0 0 40px -8px oklch(0.83 0.083 144 / 35%);
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
   }
-
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: oklch(0.83 0.083 144 / 35%);
+    color: var(--bone);
+  }
+  :focus-visible {
+    outline: 1px solid var(--biolume);
+    outline-offset: 3px;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
   }
 }
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lichen);
+}
+
+@utility hairline-grid {
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s var(--ease-organic);
+  &:hover {
+    background-size: 100% 1px;
+  }
+}
+
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -6px, 0); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Print: Solution Passports print as clean documents */
+@media print {
+  html, body { background: white !important; color: black !important; }
+  .no-print { display: none !important; }
+  .print-doc { color: black !important; }
+  .print-doc * { color: black !important; border-color: #ccc !important; background: transparent !important; }
+}
+
+/* MapLibre controls in the observatory palette */
+.maplibregl-ctrl-group { background: var(--graphite) !important; border: 1px solid var(--hairline); }
+.maplibregl-ctrl-group button span { filter: invert(1); }
+.maplibregl-ctrl-attrib { background: oklch(0.13 0.004 165 / 70%) !important; color: var(--lichen) !important; }
+.maplibregl-ctrl-attrib a { color: var(--lichen) !important; }
+.maplibregl-popup-content { background: var(--graphite) !important; color: var(--bone) !important; border: 1px solid var(--hairline); border-radius: 4px !important; font-family: var(--font-sans); }
+.maplibregl-popup-tip { border-top-color: var(--graphite) !important; border-bottom-color: var(--graphite) !important; }
