@@ -139,11 +139,11 @@ function RootComponent() {
       >
         Skip to content
       </a>
-      <SiteHeader />
+      <div className="no-print"><SiteHeader /></div>
       <main id="main">
         <Outlet />
       </main>
-      <SiteFooter />
+      <div className="no-print"><SiteFooter /></div>
       <Toaster theme="dark" position="bottom-right" />
     </QueryClientProvider>
   );
