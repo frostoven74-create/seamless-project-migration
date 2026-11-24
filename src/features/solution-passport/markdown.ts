@@ -24,7 +24,7 @@ ${loc || "Not provided"}
 ${list(p.rootCauses)}
 
 ## 4. SDG targets (official UN identifiers)
-${p.targets.map((t) => `- ${t.code} (${t.relation}) — ${getTarget(t.code)?.description ?? ""}\n  Why: ${t.rationale}`).join("\n")}
+${p.targets.map((t) => `- ${t.code} (${t.relation}) — ${getTarget(t.code)?.target.description ?? ""}\n  Why: ${t.rationale}`).join("\n")}
 
 ## 5. Supporting research
 ${p.research.map((r) => { const s = getSource(r.sourceId); return `- ${s ? `${s.name} — ${s.org} — ${s.url}` : r.sourceId}${r.note ? `\n  ${r.note}` : ""}`; }).join("\n") || "- None"}

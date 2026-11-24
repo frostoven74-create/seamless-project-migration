@@ -134,7 +134,7 @@ function PassportPage() {
             {p.targets.map((t) => (
               <li key={t.code}>
                 <p><Link to="/sdgs/$goal" params={{ goal: t.code.split(".")[0]! }} hash={`t-${t.code}`} className="font-mono text-sprout hover:underline">{t.code}</Link> <span className="font-mono text-[10px] uppercase text-lichen">{t.relation}{t.origin === "ai" ? " · AI-suggested" : ""}</span></p>
-                <p className="text-sm text-bone/80">{getTarget(t.code)?.description}</p>
+                <p className="text-sm text-bone/80">{getTarget(t.code)?.target.description}</p>
                 <p className="mt-1 text-sm text-lichen">Why: {t.rationale}</p>
               </li>
             ))}
@@ -256,7 +256,7 @@ function EditForm({ p }: { p: Passport }) {
 function AdaptForm({ p, onDone }: { p: Passport; onDone: (id: string) => void }) {
   const [place, setPlace] = useState("");
   const [country, setCountry] = useState("");
-  const measured = getIntervention(p.interventionId)?.params.filter((x) => x.kind === "measured").map((x) => x.key) ?? [];
+  const measured = getIntervention(p.interventionId)?.intervention.params.filter((x) => x.kind === "measured").map((x) => x.key) ?? [];
   function go(e: React.FormEvent) {
     e.preventDefault();
     const newId = uid("pp");

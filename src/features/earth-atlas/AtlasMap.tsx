@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 export type AtlasPoint = { id: string; name: string; lat: number; lon: number; value: number | null; year: number | null; norm: number | null };
@@ -45,8 +45,8 @@ export default function AtlasMap({ points, projects, label, onSelect }: { points
         },
       });
       m.addLayer({ id: "prj", type: "circle", source: "prj", paint: { "circle-radius": 6, "circle-color": css("--gold"), "circle-stroke-width": 2, "circle-stroke-color": css("--void") } });
-      m.on("click", "pts", (e) => { const f = e.features?.[0]; if (f) sel.current(String(f.properties["id"])); });
-      m.on("click", "prj", (e) => {
+      m.on("click", "pts", (e: maplibregl.MapLayerMouseEvent) => { const f = e.features?.[0]; if (f) sel.current(String(f.properties["id"])); });
+      m.on("click", "prj", (e: maplibregl.MapLayerMouseEvent) => {
         const f = e.features?.[0]; if (!f) return;
         new maplibregl.Popup({ closeButton: false }).setLngLat(e.lngLat).setHTML(`<strong>${String(f.properties["title"]).replace(/</g, "&lt;")}</strong><br/><small>${f.properties["status"]} · placed at country centre</small>`).addTo(m);
       });
@@ -63,8 +63,8 @@ export default function AtlasMap({ points, projects, label, onSelect }: { points
       (m.getSource("pts") as maplibregl.GeoJSONSource).setData({ type: "FeatureCollection", features: points.map((p) => ({ type: "Feature", geometry: { type: "Point", coordinates: [p.lon, p.lat] }, properties: p.norm === null ? { id: p.id } : { id: p.id, norm: p.norm } })) });
       (m.getSource("prj") as maplibregl.GeoJSONSource).setData({ type: "FeatureCollection", features: projects.map((p) => ({ type: "Feature", geometry: { type: "Point", coordinates: [p.lon, p.lat] }, properties: { title: p.title, status: p.status } })) });
     };
-    if (map.current) push();
-    else { const t = setInterval(() => { if (map.current) { push(); clearInterval(t); } }, 200); return () => clearInterval(t); }
+    if (map.current) { push(); return undefined; }
+    { const t = setInterval(() => { if (map.current) { push(); clearInterval(t); } }, 200); return () => clearInterval(t); }
   }, [points, projects]);
 
   return <div ref={el} className="h-[60vh] min-h-[360px] w-full" role="region" aria-label={`Map: ${label}. A table with the same data follows.`} />;
