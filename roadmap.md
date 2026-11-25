@@ -11,3 +11,5 @@
 - [ ] Discover + About (methodology, source register, limitations)
 - [ ] Tests for verification rules and calculations
 - [x] Saving: browser-only (confirmed by user)
+- [ ] First ad campaign: brief settled on landing page /planet, audience (4 groups), India; budget = no spend, so paid campaign is held pending a free/organic decision
+- [ ] Living Planet page: repeated React "synchronously unmount a root" console errors on /planet
