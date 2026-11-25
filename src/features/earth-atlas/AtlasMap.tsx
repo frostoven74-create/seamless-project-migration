@@ -52,7 +52,6 @@ export default function AtlasMap({ points, projects, label, onSelect }: { points
       });
       for (const l of ["pts", "prj"]) { m.on("mouseenter", l, () => (m.getCanvas().style.cursor = "pointer")); m.on("mouseleave", l, () => (m.getCanvas().style.cursor = "")); }
       map.current = m;
-      m.fire("data-ready");
     });
     return () => { m.remove(); map.current = null; };
   }, []);
